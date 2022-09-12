@@ -15,11 +15,11 @@ public class SimpleFPSController : MonoBehaviour {
     private float _originalSlopeLimit;
 
     [Header("Mouse look")]
-    private float xRotation = 0f;
+    private float _xRotation = 0f;
     [SerializeField] private float mouseSensitivity;
     [SerializeField] private float _minLookAngle = -85f;
     [SerializeField] private float _maxLookAngle = 75f;
-    [SerializeField] private Transform mainCam;
+    [SerializeField] private Transform _mainCam;
 
     private void Start() 
     {
@@ -27,7 +27,7 @@ public class SimpleFPSController : MonoBehaviour {
 
         _originalSlopeLimit = _charController.slopeLimit;
         _jumpMult = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
-        xRotation = mainCam.transform.eulerAngles.x;
+        _xRotation = _mainCam.transform.eulerAngles.x;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -46,10 +46,10 @@ public class SimpleFPSController : MonoBehaviour {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, _minLookAngle, _maxLookAngle);
+        _xRotation -= mouseY;
+        _xRotation = Mathf.Clamp(_xRotation, _minLookAngle, _maxLookAngle);
 
-        mainCam.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        _mainCam.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
 
@@ -62,7 +62,8 @@ public class SimpleFPSController : MonoBehaviour {
         {
             _charController.slopeLimit = _originalSlopeLimit;
         }
-        else {
+        else 
+        {
             _charController.slopeLimit = _jumpSlopeLimit;
         }
 
