@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
-  _gravity: -20
+  _gravity: -35
   _jumpHeight: 2
   _runMultiplier: 2
   _jumpSlopeLimit: 0
